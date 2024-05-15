@@ -6,16 +6,6 @@ from rest_framework.generics import ListAPIView
 from movies.models import Movie
 from movies.serializers import MovieSerializer
 
-
-class MovieListView(ListCreateAPIView):
-    queryset = Movie.objects.order_by("id")
-    serializer_class = MovieSerializer
-
-class MovieDetail(RetrieveUpdateDestroyAPIView):
-    queryset = Movie.objects.all()
-    serializer_class = MovieSerializer
-    lookup_field = 'id'
-    
 class MovieList(ListAPIView):
     serializer_class = MovieSerializer
 
@@ -30,3 +20,12 @@ class MovieList(ListAPIView):
             queryset = queryset.filter(runtime__lte=int(max_runtime))
 
         return queryset
+
+class MovieListView(ListCreateAPIView):
+    queryset = Movie.objects.order_by("id")
+    serializer_class = MovieSerializer
+
+class MovieDetail(RetrieveUpdateDestroyAPIView):
+    queryset = Movie.objects.all()
+    serializer_class = MovieSerializer
+    lookup_field = 'id'
